@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENXERGA – Produções Audiovisuais para Profissionais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #000000;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 56px 56px;
+      color: #FFFFFF;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .f-head {
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .f-sub {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 100;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+    }
+
+    .f-label {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: #888;
+    }
+
+    /* ── BRAND BAR ── */
+    .brand-bar {
+      height: 3px;
+      background: linear-gradient(to right, #0000FF 25%, #FF00FF 25% 50%, #FFFF00 50% 75%, #000 75%);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-block;
+      background: #FFFF00;
+      color: #000;
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      padding: 16px 40px;
+      text-decoration: none;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255,255,0,0.35), 0 4px 12px rgba(255,255,0,0.15);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid #333;
+      color: #888;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      padding: 16px 40px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: #888; color: #fff; }
+    .btn-outline:focus-visible { outline: 2px solid #FFFF00; outline-offset: 4px; }
+
+    /* ── NAV ── */
+    .nav-link {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #777;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:focus-visible { outline: 2px solid #FFFF00; outline-offset: 4px; }
+
+    /* ── SERVICE CARDS ── */
+    .svc-card {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      padding: 48px 40px;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-card:hover {
+      transform: translateY(-6px);
+      border-color: #333;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+    }
+    .svc-card:focus-visible { outline: 2px solid #FFFF00; }
+
+    /* ── PORTFOLIO ITEMS ── */
+    .port-item { position: relative; overflow: hidden; cursor: pointer; }
+    .port-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.4s; }
+    .port-item:hover img { transform: scale(1.04); filter: grayscale(0%) brightness(0.7); }
+    .port-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .port-item:hover .port-overlay { opacity: 1; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes logoGlow {
+      0%,100% { filter: drop-shadow(0 0 40px rgba(255,0,255,0.25)) drop-shadow(0 0 80px rgba(0,0,255,0.15)); }
+      50%     { filter: drop-shadow(0 0 60px rgba(0,255,255,0.3)) drop-shadow(0 0 120px rgba(255,0,255,0.15)); }
+    }
+
+    .anim-0 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0s both; }
+    .anim-1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+    .anim-2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+    .anim-3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
+
+    .logo-glow { animation: logoGlow 5s ease-in-out infinite; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── MISC ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #222; }
+
+    /* Noise overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Mobile nav hidden by default */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .hero-logo-col { display: none; }
+      .svc-grid { grid-template-columns: 1fr !important; }
+      .about-grid { grid-template-columns: 1fr !important; }
+      .step-grid { grid-template-columns: 1fr 1fr !important; }
+      .port-grid { grid-template-columns: 1fr 1fr !important; }
+      .stats-grid { gap: 24px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ NAV ═══ -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,0,0,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #111;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:72px;">
+
+    <a href="#" style="display:flex;align-items:center;gap:14px;text-decoration:none;" aria-label="Enxerga">
+      <img src="logo enxerga.png" alt="" style="height:42px;width:auto;">
+      <div style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="f-head" style="font-size:16px;line-height:1;color:#fff;letter-spacing:0.08em;">ENXERGA</div>
+        <div class="f-sub" style="font-size:7px;color:#555;line-height:1.4;margin-top:3px;letter-spacing:0.3em;">PRODUÇÕES AUDIOVISUAIS</div>
+      </div>
+    </a>
+
+    <div class="nav-links" style="display:flex;align-items:center;gap:36px;">
+      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#processo" class="nav-link">Processo</a>
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="padding:12px 28px;font-size:10px;">Fale Conosco</a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO ═══ -->
+<section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:transparent;position:relative;overflow:hidden;padding-top:72px;">
+
+  <!-- Ambient radial blobs -->
+  <div style="position:absolute;top:-15%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,0,255,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="position:absolute;top:30%;right:-12%;width:550px;height:550px;background:radial-gradient(circle,rgba(255,0,255,0.06) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:5%;left:35%;width:450px;height:450px;background:radial-gradient(circle,rgba(255,255,0,0.04) 0%,transparent 65%);pointer-events:none;"></div>
+
+  <div class="hero-grid" style="max-width:1240px;margin:0 auto;padding:40px 40px 48px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+
+    <!-- LEFT: copy -->
+    <div>
+      <div class="f-label anim-0" style="margin-bottom:24px;color:#aaa;">Produções Audiovisuais para Profissionais</div>
+
+      <h1 class="f-head anim-1" style="font-size:clamp(64px,7.5vw,108px);line-height:0.90;margin-bottom:32px;">
+        SUA<br>
+        <span style="color:#FFFF00;">PRESENÇA</span><br>
+        DIGITAL<br>
+        <span style="color:#FF00FF;">EM FOCO</span>
+      </h1>
+
+      <div class="brand-bar anim-2" style="width:80px;margin-bottom:32px;"></div>
+
+      <p class="anim-2" style="font-size:17px;line-height:1.85;color:#999;max-width:500px;margin-bottom:44px;font-weight:300;">
+        Fotografia, vídeo e estratégia de marketing digital
+        especializados para médicos — desenvolvidos por um
+        profissional que é fotógrafo, videógrafo <em>e</em> médico.
+        Autoridade visual que conquista pacientes.
+      </p>
+
+      <div class="anim-3" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:56px;">
+        <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="font-size:12px;">Agendar Conversa Gratuita</a>
+        <a href="#servicos" class="btn-outline">Ver Serviços</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid anim-3" style="display:flex;gap:40px;padding-top:36px;border-top:1px solid #141414;align-items:flex-start;">
+        <div style="flex:1;">
+          <div class="f-head" style="font-size:34px;color:#FFFF00;line-height:1;">2019</div>
+          <div style="font-size:10px;color:#666;letter-spacing:0.12em;text-transform:uppercase;margin-top:6px;line-height:1.6;">Desde</div>
+        </div>
+        <div style="width:1px;background:#1e1e1e;align-self:stretch;"></div>
+        <div style="flex:1.4;">
+          <div class="f-head" style="font-size:34px;color:#00FFFF;line-height:1;">0</div>
+          <div style="font-size:10px;color:#666;letter-spacing:0.1em;text-transform:uppercase;margin-top:6px;line-height:1.6;">chances de publicidade<br>/ marketing forçado</div>
+        </div>
+        <div style="width:1px;background:#1e1e1e;align-self:stretch;"></div>
+        <div style="flex:1;">
+          <div class="f-head" style="font-size:34px;color:#FF00FF;line-height:1;">100<span style="color:#555;font-size:22px;">%</span></div>
+          <div style="font-size:10px;color:#666;letter-spacing:0.12em;text-transform:uppercase;margin-top:6px;line-height:1.6;">de profissionalismo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: logo -->
+    <div class="hero-logo-col" style="display:flex;align-items:center;justify-content:center;position:relative;">
+      <div style="position:absolute;width:540px;height:540px;background:radial-gradient(circle,rgba(255,0,255,0.12) 0%,rgba(0,0,255,0.08) 45%,transparent 70%);border-radius:50%;"></div>
+      <img src="logo enxerga.png" alt="Enxerga" class="logo-glow" style="width:480px;height:auto;position:relative;z-index:1;">
+    </div>
+
+  </div>
+
+  <!-- Scroll hint -->
+  <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0.3;">
+    <div style="font-size:9px;letter-spacing:0.4em;text-transform:uppercase;">Scroll</div>
+    <div style="width:1px;height:44px;background:linear-gradient(to bottom,#fff,transparent);"></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════ SERVICES ═══ -->
+<section id="servicos" style="background:transparent;padding:112px 40px;">
+  <div style="max-width:1240px;margin:0 auto;">
+
+    <div style="margin-bottom:72px;" class="reveal">
+      <div class="f-label" style="margin-bottom:18px;">O que fazemos</div>
+      <h2 class="f-head" style="font-size:clamp(38px,4.5vw,60px);line-height:0.95;">
+        SERVIÇOS QUE<br>
+        <span style="color:#FFFF00;">TRANSFORMAM</span><br>
+        SUA IMAGEM
+      </h2>
+    </div>
+
+    <div class="svc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+
+      <!-- FOTOGRAFIA -->
+      <div class="svc-card reveal">
+        <div style="display:flex;gap:6px;margin-bottom:44px;">
+          <div style="width:36px;height:3px;background:#FF00FF;"></div>
+          <div style="width:18px;height:3px;background:#FFFF00;"></div>
+          <div style="width:9px;height:3px;background:#00FFFF;"></div>
+        </div>
+        <div style="margin-bottom:28px;">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <path d="M38 33H6C4.9 33 4 32.1 4 31V15C4 13.9 4.9 13 6 13H11L14.5 9H29.5L33 13H38C39.1 13 40 13.9 40 15V31C40 32.1 39.1 33 38 33Z" stroke="#FF00FF" stroke-width="1.5"/>
+            <circle cx="22" cy="23" r="7" stroke="#FF00FF" stroke-width="1.5"/>
+            <circle cx="34" cy="17" r="1.5" fill="#FF00FF"/>
+          </svg>
+        </div>
+        <h3 class="f-head" style="font-size:22px;margin-bottom:18px;letter-spacing:0.04em;">FOTOGRAFIA</h3>
+        <p style="font-size:15px;line-height:1.9;color:#999;font-weight:300;margin-bottom:40px;">
+          Ensaios profissionais que comunicam autoridade, competência e acessibilidade. Fotos que trazem confiança antes mesmo da primeira consulta.
+        </p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Clínica</span>
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Pessoal</span>
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Institucional</span>
+        </div>
+      </div>
+
+      <!-- VÍDEO -->
+      <div class="svc-card reveal reveal-delay-1" style="background:#0d0d0d;">
+        <div style="display:flex;gap:6px;margin-bottom:44px;">
+          <div style="width:36px;height:3px;background:#FFFF00;"></div>
+          <div style="width:18px;height:3px;background:#00FFFF;"></div>
+          <div style="width:9px;height:3px;background:#FF00FF;"></div>
+        </div>
+        <div style="margin-bottom:28px;">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <path d="M8 11L36 22L8 33V11Z" stroke="#FFFF00" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="f-head" style="font-size:22px;margin-bottom:18px;letter-spacing:0.04em;">VÍDEO</h3>
+        <p style="font-size:15px;line-height:1.9;color:#999;font-weight:300;margin-bottom:40px;">
+          Reels, vídeos educativos e institucionais com produção de qualidade. Conteúdo que engaja, educa e posiciona você como referência na sua especialidade.
+        </p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Reels</span>
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Institucional</span>
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Educativo</span>
+        </div>
+      </div>
+
+      <!-- MARKETING -->
+      <div class="svc-card reveal reveal-delay-2">
+        <div style="display:flex;gap:6px;margin-bottom:44px;">
+          <div style="width:36px;height:3px;background:#00FFFF;"></div>
+          <div style="width:18px;height:3px;background:#FF00FF;"></div>
+          <div style="width:9px;height:3px;background:#FFFF00;"></div>
+        </div>
+        <div style="margin-bottom:28px;">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <polyline points="6,36 16,24 24,30 38,14" stroke="#00FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="38" cy="14" r="2.5" fill="#00FFFF"/>
+            <circle cx="6" cy="36" r="2.5" fill="#00FFFF"/>
+          </svg>
+        </div>
+        <h3 class="f-head" style="font-size:22px;margin-bottom:18px;letter-spacing:0.04em;">MARKETING DIGITAL</h3>
+        <p style="font-size:15px;line-height:1.9;color:#999;font-weight:300;margin-bottom:40px;">
+          Estratégia completa de presença digital para médicos: posicionamento, conteúdo, crescimento orgânico e conversão. Feito por quem conhece a medicina na prática.
+        </p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Instagram</span>
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Estratégia</span>
+          <span style="font-size:10px;padding:6px 14px;border:1px solid #333;color:#888;letter-spacing:0.15em;text-transform:uppercase;">Crescimento</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ ABOUT ═══ -->
+<section id="sobre" style="background:rgba(6,6,6,0.85);padding:128px 40px;position:relative;overflow:hidden;">
+
+  <div style="position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(255,255,0,0.03) 0%,transparent 65%);pointer-events:none;"></div>
+
+  <div class="about-grid" style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;">
+
+    <!-- Image col -->
+    <div class="reveal" style="position:relative;">
+      <div style="position:relative;overflow:hidden;">
+        <img src="0R5A5146-2-2.jpg" alt="Lucas – Enxerga" style="width:100%;display:block;filter:grayscale(15%);">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 50%);"></div>
+        <div style="position:absolute;inset:0;background:rgba(0,0,200,0.04);mix-blend-mode:multiply;"></div>
+      </div>
+      <!-- Color sidebar -->
+      <div style="position:absolute;top:0;left:-10px;bottom:0;width:4px;display:flex;flex-direction:column;">
+        <div style="flex:1;background:#FF00FF;"></div>
+        <div style="flex:1;background:#FFFF00;"></div>
+        <div style="flex:1;background:#00FFFF;"></div>
+        <div style="flex:1;background:#FF0000;"></div>
+      </div>
+      <!-- Floating badge -->
+      <div style="position:absolute;bottom:-20px;right:-20px;background:#FFFF00;padding:24px 28px;">
+        <div class="f-head" style="font-size:11px;color:#000;line-height:1.7;">MÉDICO<br>+ FOTÓGRAFO<br>+ VIDEÓGRAFO</div>
+      </div>
+    </div>
+
+    <!-- Text col -->
+    <div class="reveal reveal-delay-1">
+      <div class="f-label" style="margin-bottom:24px;">Por que Enxerga?</div>
+      <h2 class="f-head" style="font-size:clamp(34px,3.8vw,52px);line-height:1.0;margin-bottom:36px;">
+        O ÚNICO<br>
+        AGENTE DE<br>
+        MARKETING MÉDICO<br>
+        <span style="color:#FFFF00;">QUE É MÉDICO</span>
+      </h2>
+      <div class="brand-bar" style="width:56px;margin-bottom:44px;"></div>
+      <p style="font-size:15px;line-height:1.9;color:#999;margin-bottom:52px;font-weight:300;">
+        Entendo o que você vive dentro do hospital e da clínica. Sei exatamente o que os pacientes precisam ver para confiar em você. E domino as ferramentas visuais para mostrar isso ao mundo. Não é só uma foto bonita ou um texto decorado no teleprompter — é a narrativa certa, entregue por alguém que fala a mesma língua que você.
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <div style="display:flex;align-items:flex-start;gap:18px;">
+          <div style="width:5px;height:5px;background:#FFFF00;border-radius:50%;margin-top:9px;flex-shrink:0;"></div>
+          <div>
+            <div class="f-head" style="font-size:12px;margin-bottom:6px;letter-spacing:0.06em;">AUTORIDADE REAL</div>
+            <div style="font-size:13px;color:#888;font-weight:300;line-height:1.7;">Graduado em Medicina, Residência de Medicina Interna, vivência clínica. A sua linguagem, os seus desafios.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:18px;">
+          <div style="width:5px;height:5px;background:#FF00FF;border-radius:50%;margin-top:9px;flex-shrink:0;"></div>
+          <div>
+            <div class="f-head" style="font-size:12px;margin-bottom:6px;letter-spacing:0.06em;">PRODUÇÃO AUDIOVISUAL</div>
+            <div style="font-size:13px;color:#888;font-weight:300;line-height:1.7;">Fotografia e vídeo com excelência, feito para você.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:18px;">
+          <div style="width:5px;height:5px;background:#00FFFF;border-radius:50%;margin-top:9px;flex-shrink:0;"></div>
+          <div>
+            <div class="f-head" style="font-size:12px;margin-bottom:6px;letter-spacing:0.06em;">ESTRATÉGIA INTEGRADA</div>
+            <div style="font-size:13px;color:#888;font-weight:300;line-height:1.7;">Do planejamento à entrega: conteúdo, posicionamento e crescimento digital.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PROCESS ═══ -->
+<section id="processo" style="background:transparent;padding:128px 40px;">
+  <div style="max-width:1240px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:88px;" class="reveal">
+      <div class="f-label" style="margin-bottom:18px;">O processo</div>
+      <h2 class="f-head" style="font-size:clamp(38px,4.5vw,56px);">
+        COMO <span style="color:#00FFFF;">FUNCIONA</span>
+      </h2>
+    </div>
+
+    <div class="step-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;">
+
+      <!-- Connector -->
+      <div style="position:absolute;top:27px;left:calc(12.5% + 24px);right:calc(12.5% + 24px);height:1px;background:linear-gradient(to right,#FF00FF,#FFFF00,#00FFFF,transparent);"></div>
+
+      <!-- Step 1 -->
+      <div class="reveal" style="padding:0 28px;text-align:center;">
+        <div style="width:54px;height:54px;border:1px solid #FF00FF;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+          <span class="f-head" style="font-size:17px;color:#FF00FF;">01</span>
+        </div>
+        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">DIAGNÓSTICO</h4>
+        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Análise da sua presença digital atual e definição de objetivos e posicionamento.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="reveal reveal-delay-1" style="padding:0 28px;text-align:center;">
+        <div style="width:54px;height:54px;border:1px solid #FFFF00;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+          <span class="f-head" style="font-size:17px;color:#FFFF00;">02</span>
+        </div>
+        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">ESTRATÉGIA</h4>
+        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Planejamento de conteúdo, calendário editorial e identidade visual customizada.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="reveal reveal-delay-2" style="padding:0 28px;text-align:center;">
+        <div style="width:54px;height:54px;border:1px solid #00FFFF;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+          <span class="f-head" style="font-size:17px;color:#00FFFF;">03</span>
+        </div>
+        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">PRODUÇÃO</h4>
+        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Sessão fotográfica e gravação de vídeos com direção criativa e pós-produção completa.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="reveal reveal-delay-3" style="padding:0 28px;text-align:center;">
+        <div style="width:54px;height:54px;border:1px solid #fff;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+          <span class="f-head" style="font-size:17px;color:#fff;">04</span>
+        </div>
+        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">CRESCIMENTO</h4>
+        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Monitoramento de métricas, ajustes de estratégia e evolução contínua do perfil.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PORTFOLIO ═══ -->
+<section id="portfolio" style="background:rgba(5,5,5,0.85);padding:128px 40px;">
+  <div style="max-width:1240px;margin:0 auto;">
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;" class="reveal">
+      <div>
+        <div class="f-label" style="margin-bottom:18px;">Nosso trabalho</div>
+        <h2 class="f-head" style="font-size:clamp(38px,4.5vw,56px);line-height:0.95;">
+          IMAGENS QUE<br>
+          <span style="color:#FF00FF;">VENDEM</span>
+        </h2>
+      </div>
+      <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="flex-shrink:0;">Ver Portfólio Completo</a>
+    </div>
+
+    <div class="port-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:380px 380px;gap:4px;">
+
+      <!-- Large -->
+      <div class="port-item" style="grid-row:span 2;">
+        <img src="0R5A3236.jpg" alt="Portfolio" style="height:100%;">
+        <div class="port-overlay">
+          <div style="position:absolute;bottom:32px;left:32px;">
+            <div class="f-head" style="font-size:13px;margin-bottom:6px;">FOTOGRAFIA PROFISSIONAL</div>
+            <div style="font-size:11px;color:#aaa;font-weight:300;">Enxerga · Produções Audiovisuais</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TR -->
+      <div class="port-item">
+        <img src="Clara (12 de 114)-2-2.jpg" alt="Portfolio">
+        <div class="port-overlay" style="background:linear-gradient(to top,rgba(255,0,255,0.5) 0%,transparent 55%);"></div>
+      </div>
+
+      <!-- TR2 -->
+      <div class="port-item">
+        <img src="Katia (38 de 129)-2-2.jpg" alt="Portfolio">
+        <div class="port-overlay" style="background:linear-gradient(to top,rgba(0,255,255,0.4) 0%,transparent 55%);"></div>
+      </div>
+
+      <!-- BR -->
+      <div class="port-item">
+        <img src="Paôla_Todas (28 de 247)-2-2.jpg" alt="Portfolio">
+        <div class="port-overlay" style="background:linear-gradient(to top,rgba(255,255,0,0.35) 0%,transparent 55%);"></div>
+      </div>
+
+      <!-- BR2 -->
+      <div class="port-item">
+        <img src="0R5A8871-2.jpg" alt="Portfolio">
+        <div class="port-overlay" style="background:linear-gradient(to top,rgba(255,0,0,0.4) 0%,transparent 55%);"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CTA ═══ -->
+<section id="contato" style="background:rgba(4,4,4,0.9);padding:128px 40px;position:relative;overflow:hidden;">
+
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,0,0.04) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,0,0.4),transparent);"></div>
+
+  <div style="max-width:680px;margin:0 auto;text-align:center;position:relative;z-index:1;" class="reveal">
+
+    <div class="f-label" style="margin-bottom:28px;color:#aaa;">Pronto para crescer?</div>
+
+    <h2 class="f-head" style="font-size:clamp(48px,6vw,80px);line-height:0.9;margin-bottom:40px;">
+      FAÇA SUA<br>
+      IMAGEM<br>
+      <span style="color:#FFFF00;">TRABALHAR</span><br>
+      POR VOCÊ
+    </h2>
+
+    <div class="brand-bar" style="width:80px;margin:0 auto 44px;"></div>
+
+    <p style="font-size:16px;line-height:1.85;color:#888;margin-bottom:56px;font-weight:300;">
+      Agende uma conversa gratuita. Vamos entender sua realidade
+      e mostrar como a Enxerga pode transformar sua presença digital.
+    </p>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+      <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="font-size:12px;padding:20px 64px;max-width:400px;width:100%;text-align:center;">
+        Agendar Conversa Gratuita
+      </a>
+      <p style="font-size:11px;color:#444;letter-spacing:0.08em;">Sem compromisso · 30 minutos · Via WhatsApp</p>
+    </div>
+
+    <div style="margin-top:72px;padding-top:48px;border-top:1px solid #0f0f0f;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#666;margin-bottom:10px;">Instagram</div>
+        <a href="https://instagram.com/enxerga" target="_blank" style="font-size:14px;color:#999;font-weight:300;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">instagram.com/enxerga</a>
+      </div>
+      <div>
+        <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#666;margin-bottom:10px;">Email</div>
+        <a href="mailto:erbano.lho@gmail.com" style="font-size:14px;color:#999;font-weight:300;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">erbano.lho@gmail.com</a>
+      </div>
+      <div>
+        <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#666;margin-bottom:10px;">WhatsApp</div>
+        <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="font-size:11px;padding:10px 24px;display:inline-block;">
+          +55 41 9 8841-5351
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══ -->
+<footer style="background:#000;border-top:1px solid #181818;padding:48px 40px;">
+  <div style="max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;">
+
+    <div style="display:flex;align-items:center;gap:16px;">
+      <img src="logo enxerga.png" alt="Enxerga" style="height:36px;width:auto;opacity:0.85;">
+      <div class="f-head" style="font-size:18px;color:#ccc;letter-spacing:0.06em;">ENXERGA</div>
+    </div>
+
+    <div style="display:flex;gap:4px;">
+      <div style="width:28px;height:3px;background:#0000FF;"></div>
+      <div style="width:28px;height:3px;background:#FF00FF;"></div>
+      <div style="width:28px;height:3px;background:#FFFF00;"></div>
+      <div style="width:28px;height:3px;background:#2a2a2a;border:1px solid #333;"></div>
+    </div>
+
+    <div style="font-size:11px;color:#444;letter-spacing:0.08em;font-weight:300;">
+      © 2026 ENXERGA · TODOS OS DIREITOS RESERVADOS
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Nav active states
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        navLinks.forEach(l => l.style.color = l.getAttribute('href') === '#' + en.target.id ? '#fff' : '#777');
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => navObs.observe(s));
+</script>
+
+</body>
+</html>
