@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Dev screenshots
+temporary screenshots/
+screenshot-*.png
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+
+# Claude AI dev files
+.claude/
+
+# Logs
+*.log
