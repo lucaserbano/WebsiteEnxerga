@@ -172,33 +172,149 @@
       z-index: 9999;
     }
 
-    /* Mobile nav hidden by default */
+    /* ── HAMBURGER ── */
+    #nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid #222;
+      padding: 10px 12px;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+    }
+    #nav-toggle:hover { border-color: #444; }
+    #nav-toggle:focus-visible { outline: 2px solid #FFFF00; outline-offset: 4px; }
+    .burger-line {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #aaa;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+    }
+    #nav-toggle.open .burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    #nav-toggle.open .burger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    #nav-toggle.open .burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu {
+      display: none;
+      background: rgba(0,0,0,0.97);
+      border-top: 1px solid #111;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      padding: 8px 0 24px;
+    }
+    #mobile-menu.open { display: block; }
+    .mobile-nav-link {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #777;
+      text-decoration: none;
+      display: block;
+      padding: 16px 24px;
+      border-bottom: 1px solid #0d0d0d;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-nav-link:hover { color: #fff; background: #080808; }
+
+    /* ── STEP CONNECTOR ── */
+    .step-connector { position: absolute; top: 27px; left: calc(12.5% + 24px); right: calc(12.5% + 24px); height: 1px; background: linear-gradient(to right, #FF00FF, #FFFF00, #00FFFF, transparent); }
+
+    /* ══════════════════════════════════════
+       MOBILE RESPONSIVE
+    ══════════════════════════════════════ */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero-grid { grid-template-columns: 1fr !important; }
+
+      /* NAV */
+      .nav-links { display: none !important; }
+      #nav-toggle { display: flex !important; }
+
+      /* HERO */
+      .hero-grid { grid-template-columns: 1fr !important; padding: 32px 24px 48px !important; gap: 32px !important; }
       .hero-logo-col { display: none; }
+      .stats-grid { gap: 20px !important; flex-wrap: wrap; }
+
+      /* SECTIONS padding */
+      section { padding-left: 24px !important; padding-right: 24px !important; }
+
+      /* SERVICES */
       .svc-grid { grid-template-columns: 1fr !important; }
-      .about-grid { grid-template-columns: 1fr !important; }
-      .step-grid { grid-template-columns: 1fr 1fr !important; }
-      .port-grid { grid-template-columns: 1fr 1fr !important; }
-      .stats-grid { gap: 24px !important; }
+
+      /* ABOUT */
+      .about-grid { grid-template-columns: 1fr !important; gap: 56px !important; }
+
+      /* STEP GRID — 1 column with left vertical connector */
+      .step-grid {
+        grid-template-columns: 1fr !important;
+        row-gap: 0 !important;
+        padding-left: 24px;
+        border-left: 1px solid #1e1e1e;
+        margin-left: 26px;
+      }
+      .step-connector { display: none !important; }
+      .step-item {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 20px !important;
+        text-align: left !important;
+        padding: 0 16px 48px 0 !important;
+        position: relative;
+      }
+      .step-item:last-child { padding-bottom: 0 !important; }
+      .step-item::before {
+        content: '';
+        position: absolute;
+        left: -31px;
+        top: 25px;
+        width: 8px;
+        height: 8px;
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 50%;
+      }
+      .step-num { flex-shrink: 0; margin: 0 !important; }
+      .step-text { flex: 1; }
+      .step-text h4 { text-align: left; }
+      .step-text p { text-align: left; }
+
+      /* PORTFOLIO */
+      .port-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+      .port-grid > .port-item:first-child { grid-column: 1 / -1; grid-row: auto !important; height: 320px; }
+      .port-grid > .port-item:not(:first-child) { height: 200px; }
+      .port-header { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+      .port-btn-desktop { display: none !important; }
+      .port-btn-mobile { display: inline-block !important; }
+
+      /* FOOTER */
+      footer { padding: 32px 24px !important; }
+      footer > div { flex-direction: column; align-items: flex-start !important; gap: 20px !important; }
     }
   </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════ NAV ═══ -->
-<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,0,0,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #111;">
-  <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:72px;">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,0,0,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #111;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px;">
 
-    <a href="#" style="display:flex;align-items:center;gap:14px;text-decoration:none;" aria-label="Enxerga">
-      <img src="logo enxerga.png" alt="" style="height:42px;width:auto;">
-      <div style="display:flex;flex-direction:column;justify-content:center;">
-        <div class="f-head" style="font-size:16px;line-height:1;color:#fff;letter-spacing:0.08em;">ENXERGA</div>
-        <div class="f-sub" style="font-size:7px;color:#555;line-height:1.4;margin-top:3px;letter-spacing:0.3em;">PRODUÇÕES AUDIOVISUAIS</div>
+    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;" aria-label="Enxerga">
+      <img src="logo enxerga.png" alt="" style="height:40px;width:auto;flex-shrink:0;">
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:3px;">
+        <div class="f-head" style="font-size:15px;line-height:1;color:#fff;letter-spacing:0.08em;">ENXERGA</div>
+        <div class="f-sub" style="font-size:6.5px;color:#555;line-height:1;letter-spacing:0.28em;">PRODUÇÕES AUDIOVISUAIS</div>
       </div>
     </a>
 
+    <!-- Desktop links -->
     <div class="nav-links" style="display:flex;align-items:center;gap:36px;">
       <a href="#servicos" class="nav-link">Serviços</a>
       <a href="#sobre" class="nav-link">Sobre</a>
@@ -207,6 +323,24 @@
       <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="padding:12px 28px;font-size:10px;">Fale Conosco</a>
     </div>
 
+    <!-- Hamburger (mobile only) -->
+    <button id="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleNav()">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" role="navigation" aria-label="Menu mobile">
+    <a href="#servicos" class="mobile-nav-link" onclick="closeNav()">Serviços</a>
+    <a href="#sobre" class="mobile-nav-link" onclick="closeNav()">Sobre</a>
+    <a href="#processo" class="mobile-nav-link" onclick="closeNav()">Processo</a>
+    <a href="#portfolio" class="mobile-nav-link" onclick="closeNav()">Portfolio</a>
+    <div style="padding:16px 24px 0;">
+      <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="display:block;text-align:center;padding:16px;">Fale Conosco</a>
+    </div>
   </div>
 </nav>
 
@@ -454,43 +588,51 @@
 
     <div class="step-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;">
 
-      <!-- Connector -->
-      <div style="position:absolute;top:27px;left:calc(12.5% + 24px);right:calc(12.5% + 24px);height:1px;background:linear-gradient(to right,#FF00FF,#FFFF00,#00FFFF,transparent);"></div>
+      <!-- Desktop connector line -->
+      <div class="step-connector"></div>
 
       <!-- Step 1 -->
-      <div class="reveal" style="padding:0 28px;text-align:center;">
-        <div style="width:54px;height:54px;border:1px solid #FF00FF;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+      <div class="step-item reveal" style="padding:0 28px;text-align:center;">
+        <div class="step-num" style="width:54px;height:54px;border:1px solid #FF00FF;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;flex-shrink:0;">
           <span class="f-head" style="font-size:17px;color:#FF00FF;">01</span>
         </div>
-        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">DIAGNÓSTICO</h4>
-        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Análise da sua presença digital atual e definição de objetivos e posicionamento.</p>
+        <div class="step-text">
+          <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">DIAGNÓSTICO</h4>
+          <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Análise da sua presença digital atual e definição de objetivos e posicionamento.</p>
+        </div>
       </div>
 
       <!-- Step 2 -->
-      <div class="reveal reveal-delay-1" style="padding:0 28px;text-align:center;">
-        <div style="width:54px;height:54px;border:1px solid #FFFF00;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+      <div class="step-item reveal reveal-delay-1" style="padding:0 28px;text-align:center;">
+        <div class="step-num" style="width:54px;height:54px;border:1px solid #FFFF00;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;flex-shrink:0;">
           <span class="f-head" style="font-size:17px;color:#FFFF00;">02</span>
         </div>
-        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">ESTRATÉGIA</h4>
-        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Planejamento de conteúdo, calendário editorial e identidade visual customizada.</p>
+        <div class="step-text">
+          <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">ESTRATÉGIA</h4>
+          <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Planejamento de conteúdo, calendário editorial e identidade visual customizada.</p>
+        </div>
       </div>
 
       <!-- Step 3 -->
-      <div class="reveal reveal-delay-2" style="padding:0 28px;text-align:center;">
-        <div style="width:54px;height:54px;border:1px solid #00FFFF;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+      <div class="step-item reveal reveal-delay-2" style="padding:0 28px;text-align:center;">
+        <div class="step-num" style="width:54px;height:54px;border:1px solid #00FFFF;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;flex-shrink:0;">
           <span class="f-head" style="font-size:17px;color:#00FFFF;">03</span>
         </div>
-        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">PRODUÇÃO</h4>
-        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Sessão fotográfica e gravação de vídeos com direção criativa e pós-produção completa.</p>
+        <div class="step-text">
+          <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">PRODUÇÃO</h4>
+          <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Sessão fotográfica e gravação de vídeos com direção criativa e pós-produção completa.</p>
+        </div>
       </div>
 
       <!-- Step 4 -->
-      <div class="reveal reveal-delay-3" style="padding:0 28px;text-align:center;">
-        <div style="width:54px;height:54px;border:1px solid #fff;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;">
+      <div class="step-item reveal reveal-delay-3" style="padding:0 28px;text-align:center;">
+        <div class="step-num" style="width:54px;height:54px;border:1px solid #fff;display:flex;align-items:center;justify-content:center;margin:0 auto 36px;background:#000;flex-shrink:0;">
           <span class="f-head" style="font-size:17px;color:#fff;">04</span>
         </div>
-        <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">CRESCIMENTO</h4>
-        <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Monitoramento de métricas, ajustes de estratégia e evolução contínua do perfil.</p>
+        <div class="step-text">
+          <h4 class="f-head" style="font-size:13px;margin-bottom:14px;letter-spacing:0.08em;">CRESCIMENTO</h4>
+          <p style="font-size:14px;color:#777;line-height:1.85;font-weight:300;">Monitoramento de métricas, ajustes de estratégia e evolução contínua do perfil.</p>
+        </div>
       </div>
 
     </div>
@@ -501,15 +643,18 @@
 <section id="portfolio" style="background:rgba(5,5,5,0.85);padding:128px 40px;">
   <div style="max-width:1240px;margin:0 auto;">
 
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;" class="reveal">
+    <div class="port-header reveal" style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:72px;flex-wrap:wrap;">
       <div>
-        <div class="f-label" style="margin-bottom:18px;">Nosso trabalho</div>
+        <div class="f-label" style="margin-bottom:18px;">Meu trabalho</div>
         <h2 class="f-head" style="font-size:clamp(38px,4.5vw,56px);line-height:0.95;">
           IMAGENS QUE<br>
           <span style="color:#FF00FF;">VENDEM</span>
         </h2>
+        <!-- Mobile: button below title -->
+        <a href="https://wa.me/5541988415351" target="_blank" class="port-btn-mobile btn-primary" style="display:none;margin-top:24px;font-size:11px;">Ver Portfólio Completo</a>
       </div>
-      <a href="https://wa.me/5541988415351" target="_blank" class="btn-primary" style="flex-shrink:0;">Ver Portfólio Completo</a>
+      <!-- Desktop: button beside title -->
+      <a href="https://wa.me/5541988415351" target="_blank" class="port-btn-desktop btn-primary" style="flex-shrink:0;">Ver Portfólio Completo</a>
     </div>
 
     <div class="port-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:380px 380px;gap:4px;">
@@ -628,7 +773,22 @@
 </footer>
 
 <script>
-  // Smooth scroll
+  // ── HAMBURGER MENU ──
+  function toggleNav() {
+    const menu = document.getElementById('mobile-menu');
+    const toggle = document.getElementById('nav-toggle');
+    const isOpen = menu.classList.contains('open');
+    menu.classList.toggle('open', !isOpen);
+    toggle.classList.toggle('open', !isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  }
+  function closeNav() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('nav-toggle').classList.remove('open');
+    document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+  }
+
+  // ── SMOOTH SCROLL ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
