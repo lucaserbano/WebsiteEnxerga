@@ -240,7 +240,10 @@
       /* HERO */
       .hero-grid { grid-template-columns: 1fr !important; padding: 32px 24px 48px !important; gap: 32px !important; }
       .hero-logo-col { display: none; }
-      .stats-grid { gap: 20px !important; flex-wrap: wrap; }
+      .stats-grid { flex-direction: column !important; align-items: center !important; gap: 32px !important; }
+      .stats-grid > div { text-align: center !important; width: 100% !important; }
+      .stat-divider { display: none !important; }
+      .stat-spacer { display: none !important; }
 
       /* SECTIONS padding */
       section { padding-left: 24px !important; padding-right: 24px !important; }
@@ -386,15 +389,15 @@
           <div style="font-size:11px;color:#888;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;font-weight:400;">Desde</div>
           <div class="f-head" style="font-size:34px;color:#FFFF00;line-height:1;">2019</div>
         </div>
-        <div style="width:1px;background:#1e1e1e;align-self:stretch;"></div>
+        <div class="stat-divider" style="width:1px;background:#1e1e1e;align-self:stretch;"></div>
         <div style="flex:1.4;">
-          <div style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;font-weight:400;visibility:hidden;">X</div>
+          <div class="stat-spacer" style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;font-weight:400;visibility:hidden;">X</div>
           <div class="f-head" style="font-size:34px;color:#00FFFF;line-height:1;">0</div>
           <div style="font-size:12px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-top:6px;line-height:1.6;font-weight:400;">chances de marketing forçado</div>
         </div>
-        <div style="width:1px;background:#1e1e1e;align-self:stretch;"></div>
+        <div class="stat-divider" style="width:1px;background:#1e1e1e;align-self:stretch;"></div>
         <div style="flex:1;">
-          <div style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;font-weight:400;visibility:hidden;">X</div>
+          <div class="stat-spacer" style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;font-weight:400;visibility:hidden;">X</div>
           <div class="f-head" style="font-size:34px;color:#FF00FF;line-height:1;">100<span style="color:#555;font-size:22px;">%</span></div>
           <div style="font-size:12px;color:#888;letter-spacing:0.12em;text-transform:uppercase;margin-top:6px;line-height:1.6;font-weight:400;">de profissionalismo</div>
         </div>
