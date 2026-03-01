@@ -4,305 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENXERGA – Produções Audiovisuais para Profissionais</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background-color: #000000;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
-      background-size: 56px 56px;
-      color: #FFFFFF;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
+  <meta name="description" content="Enxerga é um dos lados de uma parceria estratégica que eleva a presença digital de médicos e clínicas.">
+  <meta property="og:title" content="ENXERGA – Produções Audiovisuais para Profissionais">
+  <meta property="og:description" content="Enxerga é um dos lados de uma parceria estratégica que eleva a presença digital de médicos e clínicas.">
+  <meta property="og:image" content="assets/images/og-image.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
 
-    /* ── TYPOGRAPHY ── */
-    .f-head {
-      font-family: Arial, 'Helvetica Neue', sans-serif;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-    }
-
-    .f-sub {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 100;
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-    }
-
-    .f-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 400;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.35em;
-      color: #999;
-    }
-
-    /* ── BRAND BAR ── */
-    .brand-bar {
-      height: 3px;
-      background: linear-gradient(to right, #0000FF 25%, #FF00FF 25% 50%, #FFFF00 50% 75%, #000 75%);
-    }
-
-    /* ── BUTTONS ── */
-    .btn-primary {
-      display: inline-block;
-      background: #FFFF00;
-      color: #000;
-      font-family: Arial, sans-serif;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 11px;
-      padding: 16px 40px;
-      text-decoration: none;
-      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(255,255,0,0.35), 0 4px 12px rgba(255,255,0,0.15);
-    }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-
-    .btn-outline {
-      display: inline-block;
-      border: 1px solid #333;
-      color: #888;
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-      font-weight: 300;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 11px;
-      padding: 16px 40px;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-outline:hover { border-color: #888; color: #fff; }
-    .btn-outline:focus-visible { outline: 2px solid #FFFF00; outline-offset: 4px; }
-
-    /* ── NAV ── */
-    .nav-link {
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-      font-weight: 400;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #aaa;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: #fff; }
-    .nav-link:focus-visible { outline: 2px solid #FFFF00; outline-offset: 4px; }
-
-    /* ── SERVICE CARDS ── */
-    .svc-card {
-      background: #0a0a0a;
-      border: 1px solid #1a1a1a;
-      padding: 48px 40px;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .svc-card:hover {
-      transform: translateY(-6px);
-      border-color: #333;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
-    }
-    .svc-card:focus-visible { outline: 2px solid #FFFF00; }
-
-    /* ── PORTFOLIO ITEMS ── */
-    .port-item { position: relative; overflow: hidden; cursor: pointer; }
-    .port-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.4s; }
-    .port-item:hover img { transform: scale(1.04); filter: grayscale(0%) brightness(0.7); }
-    .port-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .port-item:hover .port-overlay { opacity: 1; }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes logoGlow {
-      0%,100% { filter: drop-shadow(0 0 40px rgba(255,0,255,0.25)) drop-shadow(0 0 80px rgba(0,0,255,0.15)); }
-      50%     { filter: drop-shadow(0 0 60px rgba(0,255,255,0.3)) drop-shadow(0 0 120px rgba(255,0,255,0.15)); }
-    }
-
-    .anim-0 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0s both; }
-    .anim-1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
-    .anim-2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
-    .anim-3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
-
-    .logo-glow { animation: logoGlow 5s ease-in-out infinite; }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* ── MISC ── */
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background: #222; }
-
-    /* Noise overlay */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* ── HAMBURGER ── */
-    #nav-toggle {
-      display: none;
-      background: none;
-      border: 1px solid #222;
-      padding: 10px 12px;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      align-items: center;
-      justify-content: center;
-    }
-    #nav-toggle:hover { border-color: #444; }
-    #nav-toggle:focus-visible { outline: 2px solid #FFFF00; outline-offset: 4px; }
-    .burger-line {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: #aaa;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
-    }
-    #nav-toggle.open .burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    #nav-toggle.open .burger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    #nav-toggle.open .burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* ── MOBILE MENU ── */
-    #mobile-menu {
-      display: none;
-      background: rgba(0,0,0,0.97);
-      border-top: 1px solid #111;
-      position: absolute;
-      top: 72px;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      padding: 8px 0 24px;
-    }
-    #mobile-menu.open { display: block; }
-    .mobile-nav-link {
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #aaa;
-      text-decoration: none;
-      display: block;
-      padding: 16px 24px;
-      border-bottom: 1px solid #0d0d0d;
-      transition: color 0.2s, background 0.2s;
-    }
-    .mobile-nav-link:hover { color: #fff; background: #080808; }
-
-    /* ── STEP CONNECTOR ── */
-    .step-connector { position: absolute; top: 27px; left: calc(12.5% + 24px); right: calc(12.5% + 24px); height: 1px; background: linear-gradient(to right, #FF00FF, #FFFF00, #00FFFF, transparent); }
-
-    /* ══════════════════════════════════════
-       MOBILE RESPONSIVE
-    ══════════════════════════════════════ */
-    @media (max-width: 768px) {
-
-      /* NAV */
-      .nav-links { display: none !important; }
-      #nav-toggle { display: flex !important; }
-
-      /* HERO */
-      .hero-grid { grid-template-columns: 1fr !important; padding: 32px 24px 48px !important; gap: 32px !important; }
-      .hero-logo-col { display: none; }
-      .stats-grid { flex-direction: column !important; align-items: center !important; gap: 32px !important; }
-      .stats-grid > div { text-align: center !important; width: 100% !important; }
-      .stat-divider { display: none !important; }
-      .stat-spacer { display: none !important; }
-
-      /* SECTIONS padding */
-      section { padding-left: 24px !important; padding-right: 24px !important; }
-
-      /* SERVICES */
-      .svc-grid { grid-template-columns: 1fr !important; }
-
-      /* ABOUT */
-      .about-grid { grid-template-columns: 1fr !important; gap: 56px !important; }
-
-      /* STEP GRID — 1 column with left vertical connector */
-      .step-grid {
-        grid-template-columns: 1fr !important;
-        row-gap: 0 !important;
-        padding-left: 24px;
-        border-left: 1px solid #1e1e1e;
-        margin-left: 26px;
-      }
-      .step-connector { display: none !important; }
-      .step-item {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: flex-start !important;
-        gap: 20px !important;
-        text-align: left !important;
-        padding: 0 16px 48px 0 !important;
-        position: relative;
-      }
-      .step-item:last-child { padding-bottom: 0 !important; }
-      .step-item::before {
-        content: '';
-        position: absolute;
-        left: -31px;
-        top: 25px;
-        width: 8px;
-        height: 8px;
-        background: #111;
-        border: 1px solid #333;
-        border-radius: 50%;
-      }
-      .step-num { flex-shrink: 0; margin: 0 !important; }
-      .step-text { flex: 1; }
-      .step-text h4 { text-align: left; }
-      .step-text p { text-align: left; }
-
-      /* PORTFOLIO */
-      .port-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
-      .port-grid > .port-item:first-child { grid-column: 1 / -1; grid-row: auto !important; height: 320px; }
-      .port-grid > .port-item:first-child img { object-position: top center; }
-      .port-grid > .port-item:not(:first-child) { height: 200px; }
-      .port-header { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
-      .port-btn-desktop { display: none !important; }
-      .port-btn-mobile { display: inline-block !important; }
-
-      /* FOOTER */
-      footer { padding: 32px 24px !important; }
-      footer > div { flex-direction: column; align-items: flex-start !important; gap: 20px !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
+  
 </head>
 <body>
 
@@ -311,7 +22,7 @@
   <div style="max-width:1240px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px;">
 
     <a href="#" style="display:flex;align-items:flex-end;gap:12px;text-decoration:none;flex-shrink:0;" aria-label="Enxerga">
-      <img src="logo enxerga.png" alt="" style="height:40px;width:auto;flex-shrink:0;">
+      <img src="assets/images/logo enxerga.png" alt="" style="height:40px;width:auto;flex-shrink:0;">
       <div style="display:flex;flex-direction:column;justify-content:center;gap:3px;">
         <div class="f-head" style="font-size:15px;line-height:1;color:#fff;letter-spacing:0.08em;">ENXERGA</div>
         <div class="f-sub" style="font-size:6.5px;color:#555;line-height:1;letter-spacing:0.28em;">PRODUÇÕES AUDIOVISUAIS</div>
@@ -324,7 +35,7 @@
       <a href="#sobre" class="nav-link">Sobre</a>
       <a href="#processo" class="nav-link">Processo</a>
       <a href="#portfolio" class="nav-link">Portfolio</a>
-      <a href="https://wa.me/5541999837301" target="_blank" class="btn-primary" style="padding:12px 28px;font-size:10px;">Fale Comigo</a>
+      <a href="https://wa.me/5541999837301" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding:12px 28px;font-size:10px;">Fale Comigo</a>
     </div>
 
     <!-- Hamburger (mobile only) -->
@@ -343,7 +54,7 @@
     <a href="#processo" class="mobile-nav-link" onclick="closeNav()">Processo</a>
     <a href="#portfolio" class="mobile-nav-link" onclick="closeNav()">Portfolio</a>
     <div style="padding:16px 24px 0;">
-      <a href="https://wa.me/5541999837301" target="_blank" class="btn-primary" style="display:block;text-align:center;padding:16px;">Fale Comigo</a>
+      <a href="https://wa.me/5541999837301" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display:block;text-align:center;padding:16px;">Fale Comigo</a>
     </div>
   </div>
 </nav>
@@ -379,7 +90,7 @@
       </p>
 
       <div class="anim-3" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:56px;">
-        <a href="https://wa.me/5541999837301" target="_blank" class="btn-primary" style="font-size:12px;">Agendar Conversa Gratuita</a>
+        <a href="https://wa.me/5541999837301" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:12px;">Agendar Conversa Gratuita</a>
         <a href="#servicos" class="btn-outline">Ver Serviços</a>
       </div>
 
@@ -407,7 +118,7 @@
     <!-- RIGHT: logo -->
     <div class="hero-logo-col" style="display:flex;align-items:center;justify-content:center;position:relative;">
       <div style="position:absolute;width:540px;height:540px;background:radial-gradient(circle,rgba(255,0,255,0.12) 0%,rgba(0,0,255,0.08) 45%,transparent 70%);border-radius:50%;"></div>
-      <img src="logo enxerga.png" alt="Enxerga" class="logo-glow" style="width:480px;height:auto;position:relative;z-index:1;">
+      <img src="assets/images/logo enxerga.png" alt="Enxerga" class="logo-glow" style="width:480px;height:auto;position:relative;z-index:1;">
     </div>
 
   </div>
@@ -522,7 +233,7 @@
     <!-- Image col -->
     <div class="reveal" style="position:relative;">
       <div style="position:relative;overflow:hidden;">
-        <img src="0R5A5146-2-2.jpg" alt="Lucas – Enxerga" style="width:100%;display:block;filter:grayscale(15%);">
+        <img src="assets/images/0R5A5146-2-2.jpg" alt="Lucas – Enxerga" style="width:100%;display:block;filter:grayscale(15%);">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 50%);"></div>
         <div style="position:absolute;inset:0;background:rgba(0,0,200,0.04);mix-blend-mode:multiply;"></div>
       </div>
@@ -537,6 +248,7 @@
       <div style="position:absolute;bottom:-20px;right:-20px;background:#FFFF00;padding:24px 28px;">
         <div class="f-head" style="font-size:11px;color:#000;line-height:1.7;">MÉDICO<br>+ FOTÓGRAFO<br>+ VIDEÓGRAFO</div>
       </div>
+      <p style="margin-top:38px;font-size:15px;line-height:1.9;color:#999;font-weight:400;">Lucas Erbano</p>
     </div>
 
     <!-- Text col -->
@@ -550,7 +262,7 @@
       </h2>
       <div class="brand-bar" style="width:56px;margin-bottom:44px;"></div>
       <p style="font-size:15px;line-height:1.9;color:#999;margin-bottom:52px;font-weight:400;">
-        Entendo o que você vive dentro do hospital e da clínica. Sei exatamente o que os pacientes precisam ver para confiar em você. E domino as ferramentas visuais para mostrar isso ao mundo. Não é só uma foto bonita ou um texto decorado no teleprompter — é a narrativa certa, entregue por alguém que fala a mesma língua que você.
+        Comigo você não terá que corrigir o conteúdo técnico das suas publicações. Entendo o que você vive dentro do hospital e da clínica. E sei exatamente o que os pacientes precisam ver para confiar em você. Domino as ferramentas visuais para mostrar isso ao mundo. Não é só uma foto bonita ou um texto decorado no teleprompter — é a narrativa certa, entregue por alguém que fala a mesma língua que você.
       </p>
 
       <div style="display:flex;flex-direction:column;gap:24px;">
@@ -657,17 +369,17 @@
           <span style="color:#FF00FF;">VENDEM</span>
         </h2>
         <!-- Mobile: button below title -->
-        <a href="https://wa.me/5541999837301" target="_blank" class="port-btn-mobile btn-primary" style="display:none;margin-top:24px;font-size:11px;">Ver Portfólio Completo</a>
+        <a href="https://instagram.com/enxerga" target="_blank" rel="noopener noreferrer" class="port-btn-mobile btn-primary" style="display:none;margin-top:24px;font-size:11px;">Ver Portfólio Completo</a>
       </div>
       <!-- Desktop: button beside title -->
-      <a href="https://wa.me/5541999837301" target="_blank" class="port-btn-desktop btn-primary" style="flex-shrink:0;">Ver Portfólio Completo</a>
+      <a href="https://instagram.com/enxerga" target="_blank" rel="noopener noreferrer" class="port-btn-desktop btn-primary" style="flex-shrink:0;">Ver Portfólio Completo</a>
     </div>
 
     <div class="port-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:380px 380px;gap:4px;">
 
       <!-- Large -->
       <div class="port-item" style="grid-row:span 2;">
-        <img src="0R5A3236.jpg" alt="Portfolio" style="height:100%;">
+        <img src="assets/images/0R5A3236.jpg" alt="Fotografia profissional médica em estúdio" loading="lazy" style="height:100%;">
         <div class="port-overlay">
           <div style="position:absolute;bottom:32px;left:32px;">
             <div class="f-head" style="font-size:13px;margin-bottom:6px;">FOTOGRAFIA PROFISSIONAL</div>
@@ -678,25 +390,25 @@
 
       <!-- TR -->
       <div class="port-item">
-        <img src="Clara (12 de 114)-2-2.jpg" alt="Portfolio">
+        <img src="assets/images/Clara (12 de 114)-2-2.jpg" alt="Retrato profissional de médica" loading="lazy">
         <div class="port-overlay" style="background:linear-gradient(to top,rgba(255,0,255,0.5) 0%,transparent 55%);"></div>
       </div>
 
       <!-- TR2 -->
       <div class="port-item">
-        <img src="Katia (38 de 129)-2-2.jpg" alt="Portfolio">
+        <img src="assets/images/Katia (38 de 129)-2-2.jpg" alt="Ensaio corporativo para profissionais da saúde" loading="lazy">
         <div class="port-overlay" style="background:linear-gradient(to top,rgba(0,255,255,0.4) 0%,transparent 55%);"></div>
       </div>
 
       <!-- BR -->
       <div class="port-item">
-        <img src="Paola_Todas%20(28%20de%20247)-2-2.jpg" alt="Portfolio">
+        <img src="assets/images/Paola_Todas (28 de 247)-2-2.jpg" alt="Fotografia de equipe médica" loading="lazy">
         <div class="port-overlay" style="background:linear-gradient(to top,rgba(255,255,0,0.35) 0%,transparent 55%);"></div>
       </div>
 
       <!-- BR2 -->
       <div class="port-item">
-        <img src="0R5A8871-2.jpg" alt="Portfolio">
+        <img src="assets/images/0R5A8871-2.jpg" alt="Sessão de fotos para branding médico" loading="lazy">
         <div class="port-overlay" style="background:linear-gradient(to top,rgba(255,0,0,0.4) 0%,transparent 55%);"></div>
       </div>
 
@@ -729,7 +441,7 @@
     </p>
 
     <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-      <a href="https://wa.me/5541999837301" target="_blank" class="btn-primary" style="font-size:12px;padding:20px 64px;max-width:400px;width:100%;text-align:center;">
+      <a href="https://wa.me/5541999837301" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:12px;padding:20px 64px;max-width:400px;width:100%;text-align:center;">
         Agendar Conversa Gratuita
       </a>
       <p style="font-size:13px;color:#777;letter-spacing:0.08em;font-weight:400;">Sem compromisso · 30 minutos · Via WhatsApp</p>
@@ -738,7 +450,7 @@
     <div style="margin-top:72px;padding-top:48px;border-top:1px solid #0f0f0f;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;">
       <div>
         <div style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:10px;font-weight:400;">Instagram</div>
-        <a href="https://instagram.com/enxerga" target="_blank" style="font-size:14px;color:#999;font-weight:300;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">instagram.com/enxerga</a>
+        <a href="https://instagram.com/enxerga" target="_blank" rel="noopener noreferrer" style="font-size:14px;color:#999;font-weight:300;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">instagram.com/enxerga</a>
       </div>
       <div>
         <div style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:10px;font-weight:400;">Email</div>
@@ -746,7 +458,7 @@
       </div>
       <div>
         <div style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:10px;font-weight:400;">WhatsApp</div>
-        <a href="https://wa.me/5541999837301" target="_blank" class="btn-primary" style="font-size:11px;padding:10px 24px;display:inline-block;">
+        <a href="https://wa.me/5541999837301" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:11px;padding:10px 24px;display:inline-block;">
           +55 41 9 9983-7301
         </a>
       </div>
@@ -760,7 +472,7 @@
   <div style="max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;">
 
     <div style="display:flex;align-items:center;gap:16px;">
-      <img src="logo enxerga.png" alt="Enxerga" style="height:36px;width:auto;opacity:0.85;">
+      <img src="assets/images/logo enxerga.png" alt="Enxerga" style="height:36px;width:auto;opacity:0.85;">
       <div class="f-head" style="font-size:18px;color:#ccc;letter-spacing:0.06em;">ENXERGA</div>
     </div>
 
@@ -778,50 +490,7 @@
   </div>
 </footer>
 
-<script>
-  // ── HAMBURGER MENU ──
-  function toggleNav() {
-    const menu = document.getElementById('mobile-menu');
-    const toggle = document.getElementById('nav-toggle');
-    const isOpen = menu.classList.contains('open');
-    menu.classList.toggle('open', !isOpen);
-    toggle.classList.toggle('open', !isOpen);
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-  }
-  function closeNav() {
-    document.getElementById('mobile-menu').classList.remove('open');
-    document.getElementById('nav-toggle').classList.remove('open');
-    document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
-  }
-
-  // ── SMOOTH SCROLL ──
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-    });
-  });
-
-  // Scroll reveal
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Nav active states
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const navObs = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        navLinks.forEach(l => l.style.color = l.getAttribute('href') === '#' + en.target.id ? '#fff' : '#aaa');
-      }
-    });
-  }, { threshold: 0.5 });
-  sections.forEach(s => navObs.observe(s));
-
-</script>
+<script src="assets/js/main.js" defer></script>
 
 </body>
 </html>
